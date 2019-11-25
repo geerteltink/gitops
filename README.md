@@ -25,7 +25,10 @@ $ go tool cover -html=coverage.out -o coverage.html
 
 ## Resources
 
+- https://github.com/spf13/cobra
+- https://ordina-jworks.github.io/development/2018/10/20/make-your-own-cli-with-golang-and-cobra.html
 - https://marcofranssen.nl/start-on-your-first-golang-project/
+- https://simplyitinc.blogspot.com/2016/10/testing-code-using-execcommand-in-go.html
 
 ## Contributing
 
