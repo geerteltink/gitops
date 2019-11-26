@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"runtime"
 
 	"github.com/spf13/cobra"
 )
@@ -12,7 +13,7 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version number of GitOps",
 	Long:  "All software has versions. This is GitOps's.",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("GitOps v1.0.0")
+		fmt.Printf("GitOps %s compiled with %v on %v/%v\n", "0.2.0", runtime.Version(), runtime.GOOS, runtime.GOARCH)
 	},
 }
 
