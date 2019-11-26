@@ -5,13 +5,7 @@ import (
 )
 
 func gitCmd(args ...string) *Cmd {
-	cmd := New("git")
-
-	/*
-		for _, v := range GlobalFlags {
-			cmd.WithArg(v)
-		}
-	*/
+	cmd := NewCmd("git")
 
 	for _, a := range args {
 		cmd.WithArg(a)
@@ -31,7 +25,7 @@ func outputLines(output string) []string {
 	output = strings.TrimSuffix(output, "\n")
 	if output == "" {
 		return []string{}
-	} else {
-		return strings.Split(output, "\n")
 	}
+
+	return strings.Split(output, "\n")
 }

@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// Cmd type structure
 type Cmd struct {
 	Name   string
 	Args   []string
@@ -15,16 +16,19 @@ type Cmd struct {
 	Stderr *os.File
 }
 
+// String formats the command as a string
 func (cmd Cmd) String() string {
 	return fmt.Sprintf("%s %s", cmd.Name, strings.Join(cmd.Args, " "))
 }
 
+// WithArg adds a single argument to a command
 func (cmd *Cmd) WithArg(arg string) *Cmd {
 	cmd.Args = append(cmd.Args, arg)
 
 	return cmd
 }
 
+// WithArgs adds multiple arguments to a command
 func (cmd *Cmd) WithArgs(args ...string) *Cmd {
 	for _, arg := range args {
 		cmd.WithArg(arg)
@@ -33,6 +37,7 @@ func (cmd *Cmd) WithArgs(args ...string) *Cmd {
 	return cmd
 }
 
+// Output processes the output of a command
 func (cmd *Cmd) Output() (string, error) {
 	// verboseLog(cmd)
 	c := exec.Command(cmd.Name, cmd.Args...)
@@ -42,7 +47,8 @@ func (cmd *Cmd) Output() (string, error) {
 	return string(output), err
 }
 
-func New(name string) *Cmd {
+// NewCmd generates a new command
+func NewCmd(name string) *Cmd {
 	return &Cmd{
 		Name:   name,
 		Args:   []string{},
