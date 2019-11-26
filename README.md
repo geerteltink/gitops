@@ -3,6 +3,9 @@
 ## Usage
 
 ```bash
+# Check git status of current and all sub directories
+$ gitops status
+
 # Set upstream remote
 $ gitops upstream git@github.com:<original_organization>/<project>.git
 ```
