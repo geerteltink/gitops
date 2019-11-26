@@ -1,5 +1,12 @@
 # GitOps
 
+## Usage
+
+```bash
+# Set upstream remote
+$ gitops upstream git@github.com:<original_organization>/<project>.git
+```
+
 ## Develop
 
 Run:

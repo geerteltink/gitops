@@ -3,7 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"os/exec"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -12,7 +12,7 @@ import (
 var upstreamCmd = &cobra.Command{
 	Use:   "upstream",
 	Short: "set upstream remote",
-	Long: `Setup the upstream remote to the original project location, which needs to be done only once. For example:
+	Long: `Set the upstream remote to the original project location, which needs to be done only once. For example:
 
 gitops upstream <uri-to-original-project>
 gitops upstream git@github.com:<original_organization>/<project>.git`,
@@ -21,33 +21,49 @@ gitops upstream git@github.com:<original_organization>/<project>.git`,
 			return errors.New("Requires an uri argument")
 		}
 
-		// Detect upstream from package.json
+		// Detect upstream from package.json or composer.json
+
+		uri := args[0]
 
 		// Get remotes: git remote -v
-		rs, err := git.Remotes()
-		if err != nil {
-			err = fmt.Errorf("Can't load git remote")
-			return
-		}
-
-		out, err := exec.Command("git", "status", "-v").Output()
+		remotes, err := gitRemotes()
 		if err != nil {
 			return err
 		}
-		fmt.Printf("output\n", out)
 
 		// Find upstream remote
-		// hasUpstream := false
+		hasUpstream := false
+		for _, remote := range remotes {
+			if strings.HasPrefix(remote, "upstream") {
+				hasUpstream = true
+			}
+		}
 
-		// if !hasUpstream: git remote add upstream <uri>
-		// else: git remote set-url upstream <uri>
+		command := "add"
+		if hasUpstream {
+			command = "set-url"
+			fmt.Println("Setting upstream remote: ", uri)
+		} else {
+			fmt.Println("Adding upstream remote: ", uri)
+		}
+
+		remoteCmd := gitCmd("remote", command, "upstream", uri)
+		remoteCmd.Stderr = nil
+		_, err = remoteCmd.Output()
+		if err != nil {
+			return err
+		}
 
 		// Track upstream
 		// git config branch.master.remote upstream
+		trackCmd := gitCmd("config", "branch.master.remote", "upstream")
+		trackCmd.Stderr = nil
+		_, err = trackCmd.Output()
+		if err != nil {
+			return err
+		}
+		fmt.Println("Tracking upstream remote")
 
-		uri := args[0]
-		fmt.Println(uri)
-		exec.Command("sh", "-c", "echo '1 2 3'")
 		return nil
 	},
 }
