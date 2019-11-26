@@ -22,6 +22,13 @@ $ go build .
 $ .\gitops.exe
 ```
 
+Update dependencies:
+
+```bash
+$ go mod tidy
+$ go mod tidy
+```
+
 Test:
 
 ```bash
