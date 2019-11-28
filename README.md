@@ -41,7 +41,7 @@ $ .\gitops.exe
 Update dependencies:
 
 ```bash
-$ go mod tidy
+$ go get -u ./...
 $ go mod tidy
 ```
 
