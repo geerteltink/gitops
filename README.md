@@ -3,11 +3,24 @@
 ## Usage
 
 ```bash
+$ gitops help
+$ gitops <command> help
+$ gitops <command> --verbose
+
 # Check git status of current and all sub directories
 $ gitops status
 
 # Set upstream remote
 $ gitops upstream git@github.com:<original_organization>/<project>.git
+
+# Create hotfix from pull request
+$ gitops hotfix --pr 123  [--branch master]
+
+# Create feature from pull request
+$ gitops feature --pr 123 [--branch develop]
+
+# Merge hotfix / feature
+$ gitops merge [--branch master,develop]
 ```
 
 ## Develop
