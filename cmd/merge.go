@@ -98,7 +98,7 @@ func merge(cmd *cobra.Command, args []string) error {
 		}
 
 		// git merge --no-ff hotfix/1 -m "chore: merge hotfix (#1)" -m "Forward port #1"
-		title := fmt.Sprintf("chore: merge %s (#%s) into %s", prType, prNumber, target)
+		title := fmt.Sprintf("chore: merge %s (#%s)", prType, prNumber)
 		footer := fmt.Sprintf("Forward port #%s", prNumber)
 		if index == 0 {
 			footer = fmt.Sprintf("Close #%s", prNumber)
