@@ -1,5 +1,15 @@
 # GitOps
 
+## Install
+
+Install GitOps from source.
+
+```bash
+$ git clone git@github.com:xtreamwayz/gitops.git
+$ cd gitops
+$ go install 
+```
+
 ## Usage
 
 ```bash
