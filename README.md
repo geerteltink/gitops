@@ -1,36 +1,41 @@
 # GitOps
 
+A collection of git tools:
+
+- Show status from projects in sub directories.
+- Easy merging hotfix and feature pull requests.
+
 ## Install
 
 Install GitOps from source.
 
 ```bash
-$ git clone git@github.com:xtreamwayz/gitops.git
-$ cd gitops
-$ go install 
+git clone git@github.com:xtreamwayz/gitops.git
+cd gitops
+go install
 ```
 
 ## Usage
 
 ```bash
-$ gitops help
-$ gitops <command> help
-$ gitops <command> --verbose
+gitops help
+gitops <command> help
+gitops <command> --verbose
 
 # Check git status of current and all sub directories
-$ gitops status
+gitops status
 
 # Set upstream remote
-$ gitops upstream git@github.com:<original_organization>/<project>.git
+gitops upstream git@github.com:<original_organization>/<project>.git
 
 # Create hotfix from pull request
-$ gitops hotfix --pr 123  [--branch master]
+gitops hotfix --pr 123  [--branch master]
 
 # Create feature from pull request
-$ gitops feature --pr 123 [--branch develop]
+gitops feature --pr 123 [--branch develop]
 
 # Merge hotfix / feature
-$ gitops merge [--branch master,develop]
+gitops merge [--branch master,develop]
 ```
 
 ## Develop
@@ -38,29 +43,29 @@ $ gitops merge [--branch master,develop]
 Run:
 
 ```bash
-$ go run main.go
+go run main.go
 ```
 
 Compile and run:
 
 ```bash
-$ go build .
-$ .\gitops.exe
+go build .
+.\gitops.exe
 ```
 
 Update dependencies:
 
 ```bash
-$ go get -u ./...
-$ go mod tidy
+go get -u ./...
+go mod tidy
 ```
 
 Test:
 
 ```bash
-$ go test ./...
-$ go test -coverage -coverprofile=coverage.out ./...
-$ go tool cover -html=coverage.out -o coverage.html
+go test ./...
+go test -coverage -coverprofile=coverage.out ./...
+go tool cover -html=coverage.out -o coverage.html
 ```
 
 ## Contributing
